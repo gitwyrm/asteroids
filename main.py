@@ -48,6 +48,11 @@ def main():
             if entity.collision_with(player):
                 print("Game over!")
                 sys.exit()
+            
+            for shot in shots:
+                if entity.collision_with(shot):
+                    entity.kill()
+                    shot.kill()
 
         for entity in drawable:
             entity.draw(screen)
