@@ -2,6 +2,38 @@
 
 Anything after commit [5653afd2](../../commit/5653afd275dc149f49c2768bd065c235fc35382c) are my own improvements, not from the guided project.
 
-Added:
+## Build Instructions
 
-- GAME OVER screen with restart and quit buttons
+You can build the **Asteroids** game into a standalone executable for macOS, Windows, or Linux using **PyInstaller**.
+
+### 🔧 How to Build
+
+```bash
+# clone this repository
+git clone https://github.com/gitwyrm/asteroids.git
+cd asteroids
+
+# create a venv
+python3 -m venv venv
+
+# if you're on macOS/Linux
+source venv/bin/activate
+
+# or on Windows
+venv\Scripts\activate
+
+# install dependencies with pip
+pip install -r requirements.txt
+
+# run PyInstaller with the provided spec
+pyinstaller main.spec
+```
+
+### 📦 Output
+- macOS: The .app bundle will be in the dist/ folder as asteroids.app.
+- Windows/Linux: The executable will be in the dist/ folder as asteroids.exe or asteroids.
+
+## Added after the guided project:
+
+- **GAME OVER screen** with restart and quit buttons
+- **PyInstaller support** to package the game as a standalone `.app` or `.exe`
