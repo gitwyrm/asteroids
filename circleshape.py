@@ -36,7 +36,7 @@ class CircleShape(pygame.sprite.Sprite):
         pass
 
     def wrap(self):
-         # Screen wrapping logic
+        # Screen wrapping logic
         if self.position.x < 0:
             self.position.x = SCREEN_WIDTH
         elif self.position.x > SCREEN_WIDTH:
