@@ -7,26 +7,30 @@ class Asteroid(CircleShape):
     def __init__(self, x, y, radius, image=None):
         super().__init__(x, y, radius)
         self.image = image
-    
+        self.angle = random.uniform(0, 360)
+        self.rotation_speed = random.uniform(0.1, 1.0)
+
     def draw(self, screen):
         if self.image:
-            # Scale the image based on the asteroid's radius
+            # Scale the image
             scaled_image = pygame.transform.scale(self.image, (self.radius * 2, self.radius * 2))
             
-            # Calculate the top-left position to center the image
-            top_left_position = (self.position.x - self.radius, self.position.y - self.radius)
+            # Rotate the scaled image based on the current angle
+            rotated_image = pygame.transform.rotate(scaled_image, self.angle)
             
-            # Draw the scaled image
-            screen.blit(scaled_image, top_left_position)
+            # Get the new rect to center the rotated image
+            rect = rotated_image.get_rect(center=(self.position.x, self.position.y))
+
+            # Draw the rotated image
+            screen.blit(rotated_image, rect.topleft)
 
             # Draw wrapped images for asteroids appearing on screen edges
             for offset in CircleShape.offsets:
-                wrapped_position = pygame.Vector2(self.position) + pygame.Vector2(offset) - pygame.Vector2(self.radius, self.radius)
-                screen.blit(scaled_image, wrapped_position)
+                wrapped_rect = rect.move(offset[0], offset[1])
+                screen.blit(rotated_image, wrapped_rect.topleft)
         else:
             # Draw a circle if no image is provided
             pygame.draw.circle(screen, "white", (self.position.x, self.position.y), self.radius, 2)
-
             for offset in CircleShape.offsets:
                 wrapped_position = (self.position.x, self.position.y) + pygame.Vector2(offset)
                 pygame.draw.circle(screen, "white", wrapped_position, self.radius, 2)
@@ -34,6 +38,7 @@ class Asteroid(CircleShape):
     def update(self, dt):
         self.position += self.velocity * dt
         self.wrap()
+        self.angle += self.rotation_speed  # Rotate the asteroid slowly
 
     def split(self):
         self.kill()
