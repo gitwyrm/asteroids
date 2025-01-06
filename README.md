@@ -37,3 +37,4 @@ pyinstaller main.spec
 
 - **GAME OVER screen** with restart and quit buttons
 - **PyInstaller support** to package the game as a standalone `.app` or `.exe`
+- More realistic ship controls
