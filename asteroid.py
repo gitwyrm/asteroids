@@ -1,7 +1,7 @@
 import random
 import pygame
 from circleshape import CircleShape
-from constants import ASTEROID_MIN_RADIUS
+from constants import ASTEROID_MIN_RADIUS, SCREEN_HEIGHT, SCREEN_WIDTH
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius):
@@ -10,8 +10,14 @@ class Asteroid(CircleShape):
     def draw(self, screen):
         pygame.draw.circle(screen, "white", (self.position.x, self.position.y), self.radius, 2)
 
+        # Draw the asteroid in all wrapped positions
+        for offset in CircleShape.offsets:
+            wrapped_position = (self.position.x, self.position.y) + pygame.Vector2(offset)
+            pygame.draw.circle(screen, "white", wrapped_position, self.radius, 2)
+
     def update(self, dt):
         self.position += self.velocity * dt
+        self.wrap()
 
     def split(self):
         self.kill()

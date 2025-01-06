@@ -71,6 +71,9 @@ def main():
         if not paused:
             for entity in updatable:
                 entity.update(dt)
+            
+            if len(asteroids) == 0:
+                paused = True
 
         for entity in asteroids:
             if entity.collision_with(player):
@@ -85,7 +88,10 @@ def main():
             entity.draw(screen)
 
         if paused:
-            game_over_text = game_over_font.render("GAME OVER", True, "white")
+            if(len(asteroids) == 0):
+                game_over_text = game_over_font.render("YOU WIN", True, "green")
+            else:
+                game_over_text = game_over_font.render("GAME OVER", True, "red")
             text_rect = game_over_text.get_rect(center=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 3))
             screen.blit(game_over_text, text_rect)
             restart_button.draw(screen)
