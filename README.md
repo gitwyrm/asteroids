@@ -27,6 +27,9 @@ pip install -r requirements.txt
 
 # run PyInstaller with the provided spec
 pyinstaller main.spec
+
+# or run the game directly without PyInstaller
+python3 main.py
 ```
 
 ### 📦 Output
