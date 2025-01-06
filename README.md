@@ -41,5 +41,6 @@ python3 main.py
 - **GAME OVER screen** with restart and quit buttons
 - **PyInstaller support** to package the game as a standalone `.app` or `.exe`
 - More realistic ship controls
-- Wrap player, asteroids and shots at edges
-- No ifinite spawning asteroids anymore, instead you win if you shoot down all of them
+- **Wrap** player, asteroids and shots at edges
+- **No ifinite spawning** asteroids anymore, instead you win if you shoot down all of them
+- **Optional images**, change `USE_IMAGES` to `False` in [constants.py](./constants.py) to go back to the simple draw style
