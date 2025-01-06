@@ -26,7 +26,25 @@ class Player(CircleShape):
         return [a, b, c]
 
     def draw(self, screen):
+        # Draw the ship normally
         pygame.draw.polygon(screen, "white", self.triangle(), 2)
+
+        # Calculate screen-wrapped positions
+        offsets = [
+            (SCREEN_WIDTH, 0),     # Right edge
+            (-SCREEN_WIDTH, 0),    # Left edge
+            (0, SCREEN_HEIGHT),    # Bottom edge
+            (0, -SCREEN_HEIGHT),   # Top edge
+            (SCREEN_WIDTH, SCREEN_HEIGHT),     # Bottom-right corner
+            (SCREEN_WIDTH, -SCREEN_HEIGHT),    # Top-right corner
+            (-SCREEN_WIDTH, SCREEN_HEIGHT),    # Bottom-left corner
+            (-SCREEN_WIDTH, -SCREEN_HEIGHT),   # Top-left corner
+        ]
+
+        # Draw the ship in all wrapped positions
+        for offset in offsets:
+            wrapped_position = [point + pygame.Vector2(offset) for point in self.triangle()]
+            pygame.draw.polygon(screen, "white", wrapped_position, 2)
 
     def update(self, dt):
         self.shoot_cooldown -= dt
@@ -44,6 +62,17 @@ class Player(CircleShape):
 
         # Apply velocity to the position
         self.position += self.velocity * dt
+
+        # Screen wrapping logic
+        if self.position.x < 0:
+            self.position.x = SCREEN_WIDTH
+        elif self.position.x > SCREEN_WIDTH:
+            self.position.x = 0
+
+        if self.position.y < 0:
+            self.position.y = SCREEN_HEIGHT
+        elif self.position.y > SCREEN_HEIGHT:
+            self.position.y = 0
 
     def rotate(self, dt):
         self.rotation += PLAYER_TURN_SPEED * dt
