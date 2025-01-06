@@ -1,3 +1,4 @@
+import os
 import pygame
 import random
 from asteroid import Asteroid
@@ -28,14 +29,18 @@ class AsteroidField(pygame.sprite.Sprite):
         ],
     ]
 
-    def __init__(self):
+    def __init__(self, assets_path):
         pygame.sprite.Sprite.__init__(self, self.containers)
         self.spawned = 0
+        self.assets_path = assets_path
 
     def spawn(self, radius, position, velocity):
         if self.spawned >= MAX_ASTEROIDS:
             return
-        asteroid = Asteroid(position.x, position.y, radius)
+        if USE_IMAGES:
+            asteroid = Asteroid(position.x, position.y, radius, pygame.image.load(os.path.join(self.assets_path, 'asteroid.png')))
+        else:
+            asteroid = Asteroid(position.x, position.y, radius)
         asteroid.velocity = velocity
         self.spawned += 1
 

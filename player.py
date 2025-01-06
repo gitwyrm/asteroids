@@ -5,11 +5,12 @@ from constants import *
 from shot import Shot
 
 class Player(CircleShape):
-    def __init__(self, x, y):
+    def __init__(self, x, y, image=None):
         super().__init__(x, y, PLAYER_RADIUS)
         self.rotation = 0
         self.velocity = pygame.Vector2(0, 0)
         self.shoot_cooldown = 0
+        self.image = image
 
     def reset(self):
         self.position = pygame.Vector2(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
@@ -27,12 +28,23 @@ class Player(CircleShape):
 
     def draw(self, screen):
         # Draw the ship normally
-        pygame.draw.polygon(screen, "white", self.triangle(), 2)
+        if self.image:
+            rotated_image = pygame.transform.rotate(self.image, -self.rotation)
+            rotated_rect = rotated_image.get_rect(center=self.position)
+            screen.blit(rotated_image, rotated_rect)
+        else:
+            pygame.draw.polygon(screen, "white", self.triangle(), 2)
 
         # Draw the ship in all wrapped positions
         for offset in CircleShape.offsets:
-            wrapped_position = [point + pygame.Vector2(offset) for point in self.triangle()]
-            pygame.draw.polygon(screen, "white", wrapped_position, 2)
+            if self.image:
+                wrapped_position = (self.position.x, self.position.y) + pygame.Vector2(offset)
+                rotated_image = pygame.transform.rotate(self.image, -self.rotation)
+                rotated_rect = rotated_image.get_rect(center=wrapped_position)
+                screen.blit(rotated_image, rotated_rect)
+            else:
+                wrapped_position = [point + pygame.Vector2(offset) for point in self.triangle()]
+                pygame.draw.polygon(screen, "white", wrapped_position, 2)
 
     def update(self, dt):
         self.shoot_cooldown -= dt

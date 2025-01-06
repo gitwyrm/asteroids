@@ -1,3 +1,4 @@
+import os
 import sys
 import pygame
 from asteroid import Asteroid
@@ -12,6 +13,9 @@ from shot import Shot
 def main():
     pygame.init()
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+    # Get the path to the 'assets' folder
+    base_path = getattr(sys, '_MEIPASS', os.path.dirname(os.path.abspath(__file__)))
+    assets_path = os.path.join(base_path, 'assets')
 
     print("Starting asteroids!")
     print(f"Screen width: {SCREEN_WIDTH}")
@@ -31,9 +35,12 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
 
-    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    if USE_IMAGES:
+        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, pygame.image.load(os.path.join(assets_path, 'ship.png')))
+    else:
+        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
 
-    asteroid_field = AsteroidField()
+    asteroid_field = AsteroidField(assets_path)
 
     restart_button = Button("Restart", SCREEN_WIDTH // 4, SCREEN_HEIGHT // 2, 150, 50, "gray", "white", button_font)
     quit_button = Button("Quit", SCREEN_WIDTH * 3 // 4 - 150, SCREEN_HEIGHT // 2, 150, 50, "gray", "white", button_font)
