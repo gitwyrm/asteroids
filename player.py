@@ -2,6 +2,7 @@ import pygame
 
 from circleshape import CircleShape
 from constants import *
+from settings import Settings
 from shot import Shot
 
 class Player(CircleShape):
@@ -28,7 +29,7 @@ class Player(CircleShape):
 
     def draw(self, screen):
         # Draw the ship normally
-        if self.image:
+        if self.image and Settings.use_images:
             rotated_image = pygame.transform.rotate(self.image, -self.rotation)
             rotated_rect = rotated_image.get_rect(center=self.position)
             screen.blit(rotated_image, rotated_rect)

@@ -1,7 +1,8 @@
 import random
 import pygame
 from circleshape import CircleShape
-from constants import ASTEROID_MIN_RADIUS, SCREEN_HEIGHT, SCREEN_WIDTH
+from constants import ASTEROID_MIN_RADIUS
+from settings import Settings
 
 class Asteroid(CircleShape):
     def __init__(self, x, y, radius, image=None):
@@ -11,7 +12,7 @@ class Asteroid(CircleShape):
         self.rotation_speed = random.uniform(0.1, 1.0)
 
     def draw(self, screen):
-        if self.image:
+        if self.image and Settings.use_images:
             # Scale the image
             scaled_image = pygame.transform.scale(self.image, (self.radius * 2, self.radius * 2))
             

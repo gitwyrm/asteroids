@@ -9,6 +9,7 @@ from constants import *
 from test.profilee import C
 
 from player import Player
+from settings import Settings
 from shot import Shot
 
 def main():
@@ -36,10 +37,7 @@ def main():
     AsteroidField.containers = (updatable)
     Shot.containers = (shots, updatable, drawable)
 
-    if USE_IMAGES:
-        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, pygame.image.load(os.path.join(assets_path, 'ship.png')))
-    else:
-        player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2)
+    player = Player(SCREEN_WIDTH / 2, SCREEN_HEIGHT / 2, pygame.image.load(os.path.join(assets_path, 'ship.png')))
 
     asteroid_field = AsteroidField(assets_path)
 
@@ -61,6 +59,8 @@ def main():
                     timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
                     pygame.image.save(screen, f"screenshot_{timestamp}.png")
                     print(f"Screenshot saved as screenshot_{timestamp}.png")
+                elif event.key == pygame.K_t:
+                    Settings.toggle_use_images()
             
             # handle button clicks in pause menu
             if paused:
