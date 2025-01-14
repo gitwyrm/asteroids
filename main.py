@@ -1,3 +1,4 @@
+import datetime
 import os
 import sys
 import pygame
@@ -52,6 +53,14 @@ def main():
             # Quit if window closed
             if event.type == pygame.QUIT:
                 return
+            
+            # Screenshot
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_p:
+                    # Take a screenshot when p is pressed
+                    timestamp = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M-%S")
+                    pygame.image.save(screen, f"screenshot_{timestamp}.png")
+                    print(f"Screenshot saved as screenshot_{timestamp}.png")
             
             # handle button clicks in pause menu
             if paused:

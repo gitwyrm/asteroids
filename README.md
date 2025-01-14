@@ -55,3 +55,4 @@ python3 main.py
 - **No ifinite spawning** asteroids anymore, instead you win if you shoot down all of them
 - **Optional images**, change `USE_IMAGES` to `False` in [constants.py](./constants.py) to go back to the simple draw style
 - In addition to WASD controls (minus the S since it is not used), arrow keys and right shift can now be used
+- Press p to take a screenshot
