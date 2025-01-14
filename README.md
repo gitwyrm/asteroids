@@ -2,6 +2,16 @@
 
 Anything after commit [5653afd2](../../commit/5653afd275dc149f49c2768bd065c235fc35382c) are my own improvements, not from the guided project.
 
+## Screenshots
+
+With sprites
+
+<img src="https://github.com/user-attachments/assets/b77de640-f64a-4ca6-bc7b-a41cd01ee8b0" width=600/>
+
+Retro
+
+<img src="https://github.com/user-attachments/assets/4606f769-a247-42a4-8d83-54d6a9b75753" width=600/>
+
 ## Build Instructions
 
 You can build the **Spacerocks** game into a standalone executable for macOS, Windows, or Linux using **PyInstaller**.
