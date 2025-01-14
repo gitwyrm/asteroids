@@ -21,7 +21,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='asteroids',
+    name='spacerocks',
     debug=False,
     bootloader_ignore_signals=False,
     strip=True,
@@ -44,7 +44,7 @@ coll = COLLECT(
 )
 app = BUNDLE(
     coll,
-    name='asteroids.app',
+    name='spacerocks.app',
     icon=None,
     bundle_identifier=None,
 )

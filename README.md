@@ -1,17 +1,17 @@
-# asteroids - boot.dev guided project
+# Spacerocks - boot.dev guided project
 
 Anything after commit [5653afd2](../../commit/5653afd275dc149f49c2768bd065c235fc35382c) are my own improvements, not from the guided project.
 
 ## Build Instructions
 
-You can build the **Asteroids** game into a standalone executable for macOS, Windows, or Linux using **PyInstaller**.
+You can build the **Spacerocks** game into a standalone executable for macOS, Windows, or Linux using **PyInstaller**.
 
 ### 🔧 How to Build
 
 ```bash
 # clone this repository
-git clone https://github.com/gitwyrm/asteroids.git
-cd asteroids
+git clone https://github.com/gitwyrm/spacerocks.git
+cd spacerocks
 
 # create a venv
 python3 -m venv venv
@@ -33,8 +33,8 @@ python3 main.py
 ```
 
 ### 📦 Output
-- macOS: The .app bundle will be in the dist/ folder as asteroids.app.
-- Windows/Linux: The executable will be in the dist/ folder as asteroids.exe or asteroids.
+- macOS: The .app bundle will be in the dist/ folder as spacerocks.app.
+- Windows/Linux: The executable will be in the dist/ folder as spacerocks.exe or spacerocks.
 
 ## Added after the guided project:
 
