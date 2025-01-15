@@ -3,6 +3,9 @@ name: Build bundles with PyInstaller
 on:
   workflow_dispatch:
 
+permissions:
+  contents: write
+  
 jobs:
   build:
     runs-on: ${{ matrix.os }}
