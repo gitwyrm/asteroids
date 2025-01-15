@@ -76,7 +76,10 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           tag_name: latest
-          files: all_dist/**/*
-          body: "Automated release of Spacerocks game built with PyInstaller."
+          # Each subfolder has its own copy of Info.plist (or not).
+          files: |
+            dist/ubuntu/**
+            dist/windows/**
+            dist/macos/**/*.app/**
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
