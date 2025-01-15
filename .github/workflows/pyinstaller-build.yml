@@ -45,20 +45,19 @@ jobs:
         run: pyinstaller main.spec
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v3
         with:
           name: spacerocks-${{ matrix.os }}
           path: dist/
 
   release:
-    # Only run this job if all builds succeed:
     needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifacts
         uses: actions/download-artifact@v3
         with:
-          path: all_dist  # e.g., gather them all in a folder
+          path: all_dist
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
@@ -66,3 +65,5 @@ jobs:
           tag_name: latest
           files: all_dist/**/*
           body: "Automated release of Spacerocks game built with PyInstaller."
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
