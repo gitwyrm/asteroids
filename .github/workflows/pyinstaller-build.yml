@@ -5,7 +5,7 @@ on:
 
 permissions:
   contents: write
-  
+
 jobs:
   build:
     runs-on: ${{ matrix.os }}
@@ -45,9 +45,9 @@ jobs:
           fi
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
-          name: asteroids-${{ matrix.os }}
+          name: spacerocks-${{ matrix.os }}
           path: dist/
 
       - name: Create GitHub Release
