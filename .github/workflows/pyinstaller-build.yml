@@ -45,7 +45,7 @@ jobs:
         run: pyinstaller main.spec
 
       - name: Upload build artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: spacerocks-${{ matrix.os }}
           path: dist/
@@ -55,9 +55,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Download build artifacts
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4
         with:
-          path: all_dist
+          name: spacerocks-ubuntu-latest
+          path: dist/ubuntu
+
+      - name: Download Windows build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: spacerocks-windows-latest
+          path: dist/windows
+
+      - name: Download macOS build artifacts
+        uses: actions/download-artifact@v4
+        with:
+          name: spacerocks-macos-latest
+          path: dist/macos
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
