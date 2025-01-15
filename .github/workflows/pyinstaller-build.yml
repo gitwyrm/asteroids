@@ -53,4 +53,4 @@ jobs:
         with:
           tag_name: latest
           files: dist/*
-          body: "Automated release of Asteroids game built with PyInstaller."
+          body: "Automated release of Spacerocks game built with PyInstaller."
